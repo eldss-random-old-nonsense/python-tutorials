@@ -71,12 +71,12 @@ text_clf_svm = Pipeline([
                           alpha=1e-3, random_state=42,
                           max_iter=5, tol=None)),
 ])
-# text_clf_svm.fit(twenty_train.data, twenty_train.target)
-# predicted = text_clf_svm.predict(docs_test)
-# print("Accuracy with SVM", np.mean(predicted == twenty_test.target))
-# print(metrics.classification_report(twenty_test.target, predicted,
-#                                     target_names=twenty_test.target_names))
-# print(metrics.confusion_matrix(twenty_test.target, predicted))
+text_clf_svm.fit(twenty_train.data, twenty_train.target)
+predicted = text_clf_svm.predict(docs_test)
+print("Accuracy with SVM", np.mean(predicted == twenty_test.target))
+print(metrics.classification_report(twenty_test.target, predicted,
+                                    target_names=twenty_test.target_names))
+print(metrics.confusion_matrix(twenty_test.target, predicted))
 
 # Do automatic hyperparameter tuning
 parameters = {
@@ -90,7 +90,7 @@ gs_clf = GridSearchCV(text_clf_svm, parameters, cv=5,
 # Get best params and create model
 gs_clf = gs_clf.fit(twenty_train.data, twenty_train.target)
 predicted = gs_clf.predict(docs_test)
-# Show results
-print(metrics.classification_report(twenty_test.target, predicted,
-                                    target_names=twenty_test.target_names))
-print(metrics.confusion_matrix(twenty_test.target, predicted))
+# Results end up the same
+# print(metrics.classification_report(twenty_test.target, predicted,
+#                                     target_names=twenty_test.target_names))
+# print(metrics.confusion_matrix(twenty_test.target, predicted))
